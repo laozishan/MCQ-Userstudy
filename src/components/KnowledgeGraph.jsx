@@ -1,7 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import { graphNodeMap, layoutGraph, NODE_TYPES } from '../lib/graph.js';
 
-export function KnowledgeGraph({ graph, activeEvidenceId, onEvidenceHover }) {
+export function KnowledgeGraph({
+  graph,
+  activeEvidenceId,
+  editable = false,
+  onEvidenceHover,
+  onNodeLabelChange,
+  onNodeDelete,
+}) {
   const [selectedNodeId, setSelectedNodeId] = useState(null);
   const layout = useMemo(() => layoutGraph(graph), [graph]);
   const nodeMap = useMemo(() => graphNodeMap(layout.nodes), [layout.nodes]);
@@ -75,6 +82,23 @@ export function KnowledgeGraph({ graph, activeEvidenceId, onEvidenceHover }) {
             <span>{NODE_TYPES[selectedNode.type]?.label ?? 'Node'}</span>
             <h3>{selectedNode.label}</h3>
             <p>{selectedNode.tooltip ?? 'This node is defined in the question graph JSON.'}</p>
+            {editable ? (
+              <div className="node-edit-tools">
+                <label className="field">
+                  <span>Node label</span>
+                  <input
+                    value={selectedNode.label}
+                    onChange={(event) => onNodeLabelChange(selectedNode.id, event.target.value)}
+                  />
+                </label>
+                <button className="danger-action" type="button" onClick={() => {
+                  onNodeDelete(selectedNode.id);
+                  setSelectedNodeId(null);
+                }}>
+                  Delete node and linked vignette phrase
+                </button>
+              </div>
+            ) : null}
           </>
         ) : (
           <p>Select a node to inspect the data behind it.</p>

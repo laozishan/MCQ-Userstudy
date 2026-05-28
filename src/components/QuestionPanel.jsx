@@ -76,7 +76,7 @@ export function QuestionPanel({
           <button className="accept" type="button" onClick={onAccept}>Accept</button>
           <button className="reject" type="button" onClick={onReject}>Reject</button>
           <button type="button" onClick={startEditing}>Edit</button>
-          {question.regenerable ? <button type="button" onClick={onRegenerate}>Regenerate</button> : null}
+          {onRegenerate ? <button type="button" onClick={onRegenerate}>Regenerate</button> : null}
           <button type="button" onClick={onReset}>Reset</button>
         </div>
       </div>

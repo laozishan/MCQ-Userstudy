@@ -39,7 +39,7 @@ button { cursor: pointer; }
 .brand span, .brand-button span { color: var(--accent); font-style: italic; }
 .brand-lockup p { color: var(--faint); margin: 2px 0 28px; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; font-weight: 700; }
 
-.setup-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, .75fr); gap: 18px; }
+.setup-grid { display: grid; grid-template-columns: minmax(0, 620px); gap: 18px; }
 .setup-panel, .schema-panel, .card, .side-panel, .modal {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -151,6 +151,7 @@ mark.active { border-color: #c48a1d; box-shadow: 0 0 0 2px rgba(196,138,29,.15);
 .option-editor-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 
 .side-panel { min-width: 0; padding: 14px; align-self: start; }
+.kg-stack { display: grid; gap: 14px; min-width: 0; align-self: start; }
 .panel-head { display: flex; justify-content: space-between; gap: 12px; align-items: start; margin-bottom: 12px; }
 .panel-head h2 { font-size: 16px; margin: 4px 0 0; }
 .legend { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; font-size: 11px; color: var(--muted); }
@@ -175,10 +176,72 @@ mark.active { border-color: #c48a1d; box-shadow: 0 0 0 2px rgba(196,138,29,.15);
 .node-inspector span { color: var(--faint); font-size: 11px; font-weight: 900; text-transform: uppercase; }
 .node-inspector h3, .why-box h3 { margin: 4px 0 6px; }
 .node-inspector p, .why-box p, .preview-box p { margin: 0; line-height: 1.6; color: var(--muted); }
+.node-edit-tools { margin-top: 12px; }
+.danger-action {
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid var(--bad);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--bad);
+  padding: 9px 12px;
+  font-weight: 900;
+}
 .evidence-list { padding-left: 18px; line-height: 1.65; color: var(--muted); }
 .distractor-list { display: grid; gap: 8px; }
 .distractor-list article { border: 1px solid var(--border); border-radius: 10px; padding: 10px; background: #fff; }
 .distractor-list p { margin: 4px 0 0; color: var(--muted); line-height: 1.55; }
+.mini-graphs-panel { padding: 14px; }
+.mini-graph-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.mini-graph-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+.mini-graph-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.mini-graph-head strong { font-size: 12px; line-height: 1.35; }
+.mini-graph-head span {
+  align-self: start;
+  border-radius: 999px;
+  background: var(--bad-soft);
+  color: var(--bad);
+  padding: 2px 7px;
+  font-size: 10px;
+  font-weight: 900;
+}
+.mini-graph-card svg { width: 100%; display: block; background: #fff; }
+.mini-graph-card path { fill: none; stroke: #b9b1aa; stroke-width: 2; }
+.mini-graph-card text { font-size: 10px; fill: var(--muted); text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 4px; }
+.mini-node-label {
+  height: 32px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text);
+  overflow: hidden;
+}
+.mini-graph-card p { margin: 0; padding: 0 10px 10px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.mini-evidence-row { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 10px 10px; }
+.mini-evidence-row button {
+  border: 1px solid #f0d899;
+  border-radius: 999px;
+  background: #fff8db;
+  color: #8a5a00;
+  padding: 4px 7px;
+  font-size: 10px;
+  font-weight: 800;
+}
 
 .modal-backdrop {
   position: fixed;
@@ -211,5 +274,6 @@ mark.active { border-color: #c48a1d; box-shadow: 0 0 0 2px rgba(196,138,29,.15);
 @media (max-width: 640px) {
   .setup-page { padding: 16px; }
   .setup-panel, .schema-panel, .card, .side-panel { border-radius: 10px; }
+  .mini-graph-grid { grid-template-columns: 1fr; }
   .option-editor-grid { grid-template-columns: 1fr; }
 }

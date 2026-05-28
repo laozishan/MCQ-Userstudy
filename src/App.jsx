@@ -9,11 +9,17 @@ function cloneQuestion(question) {
   return structuredClone(question);
 }
 
+function defaultModeForQuestion(question) {
+  if (question.taskLabel === 'Task 1') return 'text';
+  if (question.taskLabel === 'Task 2') return 'kg';
+  return 'both';
+}
+
 export default function App() {
   const [questions, setQuestions] = useState(() => questionsData.map(cloneQuestion));
   const [setupOpen, setSetupOpen] = useState(true);
   const [currentQuestionId, setCurrentQuestionId] = useState(questionsData[0].id);
-  const [reviewMode, setReviewMode] = useState('kg');
+  const [reviewMode, setReviewMode] = useState(defaultModeForQuestion(questionsData[0]));
   const [bank, setBank] = useLocalStorage('medmcq_question_bank', []);
 
   const currentQuestion = useMemo(
@@ -21,9 +27,14 @@ export default function App() {
     [currentQuestionId, questions],
   );
 
-  function startReview(nextQuestionId, nextMode) {
+  function selectQuestion(nextQuestionId) {
+    const nextQuestion = questions.find((question) => question.id === nextQuestionId) ?? questions[0];
     setCurrentQuestionId(nextQuestionId);
-    setReviewMode(nextMode);
+    setReviewMode(defaultModeForQuestion(nextQuestion));
+  }
+
+  function startReview(nextQuestionId) {
+    selectQuestion(nextQuestionId);
     setSetupOpen(false);
   }
 
@@ -72,7 +83,7 @@ export default function App() {
       mode={reviewMode}
       bank={bank}
       onModeChange={setReviewMode}
-      onQuestionChange={setCurrentQuestionId}
+      onQuestionChange={selectQuestion}
       onSetup={() => setSetupOpen(true)}
       onSaveQuestion={updateQuestion}
       onResetQuestion={resetQuestion}
