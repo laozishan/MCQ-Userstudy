@@ -34,9 +34,3 @@ Recommended settings for Vercel or Netlify:
 
 GitHub Pages is also configured through `.github/workflows/deploy.yml`.
 Push this project to `https://github.com/laozishan/medmcq.git` on the `main` branch, then enable Pages with source set to **GitHub Actions** in the repository settings.
-
-If you update the source prototype HTML, regenerate the React assets with:
-
-```bash
-node tools/extract-prototype.mjs "C:\Users\23503\Downloads\preview (53).html"
-```
